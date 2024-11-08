@@ -23,6 +23,15 @@ class PencilFieldController {
 
   PencilDrawing get drawing => _drawing;
 
+    // Dispose any resources when the controller is no longer needed
+  void dispose() {
+    // Clear all stored drawings and resources to help with memory management
+    _drawing = PencilDrawing(strokes: <PencilStroke>[]);
+    _undoStrokes = PencilDrawing(strokes: <PencilStroke>[]);
+    _eraserStroke = null;
+    _writePathsMarkedForErase.clear();
+  }
+
   /// Set the initial strokes of the drawing. For example, this can be used for
   /// automatically generated paths. This sets the mode to writing.
   void setDrawing(PencilDrawing pencilDrawing) {
